@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>More or Less Demo</title>
+    </head>
+    <body>
+		<div class="mybox">
+			<h2>Some box header - simple use</h2>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>Code: $('.mybox').more_less_button();</p>
+		</div>
+		
+		<hr />
+		
+		<div class="mybox-button-text-modified">
+			<h2>Some box header - with modified readmore\read less buttons</h2>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>Code: $('.mybox').more_less_button({'read_more' : 'Some Read More Text', 'read_less' : 'Some Read LESS Text'});</p>
+		</div>
+		
+		<hr />
+		
+		<div class="mybox-start-open">
+			<h2>Some box header - with modified readmore\read less buttons</h2>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>Code: $('.mybox-start-open').more_less_button({'more' : false});</p>
+		</div>
+		
+		<hr />
+		
+		<div class="mybox-partially-collapsed">
+			<h2>Some box header - to collpase partially</h2>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>Code: $('.mybox-start-open').more_less_button({'collapsed_value' : '60px'});</p>
+		</div>
+		
+		<hr />
+		
+		<div class="mybox-partially-extended">
+			<h2>Some box header - to extend partially</h2>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>This is some of mybox content</p>
+			<p>Code: $('.mybox-partially-extended').more_less_button({'collapsed_value' : '60px', 'extended_value' : '150px'});</p>
+		</div>
+		
+		
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+        <script src="js/vendor/more_less_button.js"></script>
+		<script>
+		$(document).ready(function() {
+			$('.mybox').more_less_button();
+			
+			$('.mybox-button-text-modified').more_less_button({'read_more' : 'Some Read More Text', 'read_less' : 'Some Read LESS Text'});
+			
+			$('.mybox-start-open').more_less_button({'more' : false});
+			
+			$('.mybox-partially-collapsed').more_less_button({'collapsed_value' : '60px'});
+			
+			$('.mybox-partially-extended').more_less_button({'collapsed_value' : '60px', 'extended_value' : '150px'});
+			
+		});
+		
+		</script>
+
+    </body>
+</html>
