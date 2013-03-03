@@ -1,5 +1,5 @@
 /* ============================================================
- * more_less_button.js v1.0
+ * more_less_button.js v1.1
  * ============================================================
  *
  * Information: This plugin create Read More\ Read Less button that expand or collapse certain blocks
@@ -20,6 +20,9 @@
  *  extended_value
  *  $('#some-block', context).more_less_button({'collapsed_value' : '200px', 'extended_value' : '400px'});
  *      - If you want the #some-block to partly extended, insert a value by pixels
+ *  sub_element
+ *  $('#some-block', context).more_less_button({'sub_element' : '.some-jquery-selector'});
+ *  	- If you want to expand\collapse some sub elemnt within the #some-block
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +46,8 @@
             'extended_value' : 'toggle', //Extended value, must be inserted if collapse value is present
             'more' : true, //we want to start at read more = true, want to start at read less = false
             'read_more' : 'Read More', //Read More text
-            'read_less' : 'Read Less' //Read Less text
+            'read_less' : 'Read Less', //Read Less text
+            'sub_element' : null
         };
 
     // plugin constructor
@@ -72,9 +76,9 @@
                 more_class = 'more';
                 settings.more = settings.read_more;
                 if(settings.collapsed_value !== 'toggle') {
-                    $this.css({'overflow' :'hidden','height': settings.collapsed_value});
+                    this._element_to_hide($($this)).css({'overflow' :'hidden','height': settings.collapsed_value});
                 } else {
-                    $this.css({'overflow' :'hidden', 'display' : 'none'});
+                    this._element_to_hide($($this)).css({'overflow' :'hidden', 'display' : 'none'});
                 }
             } else {
                 more_class = 'less';
@@ -83,21 +87,30 @@
             var button = this.create_button($this, more_class, settings.more);
 
             var _this = this;
-            button.bind("click", function() { _this.activate_more_less_button($(this) ,settings);});
+            button.bind("click", function() { _this.activate_more_less_button($(this));});
         },
 
-        activate_more_less_button: function(el, settings) {
+        activate_more_less_button: function(el) {
             el = $(el);
             el.prev().css({'overflow' :'hidden'});
             if (el.hasClass('more')) {
                 el.removeClass('more');
-                el.text(settings.read_less);
-                el.prev().animate({'height': settings.extended_value});
+                el.text(this.options.read_less);
+                this._element_to_hide(el.prev()).animate({'height': this.options.extended_value});
 
             } else {
                 el.addClass('more');
-                el.text(settings.read_more);
-                el.prev().animate({'height': settings.collapsed_value});
+                el.text(this.options.read_more);
+                this._element_to_hide(el.prev()).animate({'height': this.options.collapsed_value});
+            }
+        },
+
+        _element_to_hide: function(el) {
+
+            if(this.options.sub_element == null) {
+                return el;
+            } else {
+                return el.find(this.options.sub_element);
             }
         },
 
